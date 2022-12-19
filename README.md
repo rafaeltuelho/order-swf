@@ -1,6 +1,6 @@
 # OrderManagement with Serverless Workflow
 
-## Greeting
+## Workflow entry points
 
 Launch the process:
 
