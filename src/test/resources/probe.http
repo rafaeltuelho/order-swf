@@ -8,7 +8,7 @@ Accept: application/json
 
 { 
     "workflowdata": { 
-        "orderId": "order-123",
+        "orderId": "{{orderId}}23",
         "item": "1110"
     } 
 }
@@ -23,7 +23,59 @@ Accept: application/json
 
 { 
     "workflowdata": { 
-        "orderId": "order-123",
+        "orderId": "{{orderId}}23",
         "item": "1111"
     } 
+}
+
+
+########################################################
+# Start order workflow via Cloud Event
+# - use case: item available in the inventory
+@orderId = 1000
+
+POST http://localhost:8080/
+Content-Type: application/json
+Accept: application/json
+ce-specversion: 1.0
+ce-id: {{$guid}}
+ce-source: Client
+ce-type: OrderEventType
+ce-orderid: {{orderId}}
+
+{ 
+    "orderId": "{{orderId}}",
+    "item": "1110"
+}
+
+########################################################
+# Shipment via Cloud Event
+
+POST http://localhost:8080/
+Content-Type: application/json
+Accept: application/json
+ce-specversion: 1.0
+ce-id: {{$guid}}
+ce-source: Shipper
+ce-type: ShippingEventType
+ce-orderid: {{orderId}}
+
+{ 
+    "orderId": "{{orderId}}"
+}
+
+########################################################
+# Cancel Order via Cloud Event
+
+POST http://localhost:8080/
+Content-Type: application/json
+Accept: application/json
+ce-specversion: 1.0
+ce-id: {{$guid}}
+ce-source: Client
+ce-type: CancelEventType
+ce-orderid: {{orderId}}
+
+{ 
+    "orderId": "{{orderId}}"
 }
