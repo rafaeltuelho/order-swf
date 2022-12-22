@@ -1,0 +1,29 @@
+########################################################
+# Start order workflow
+# - use case: item available in the inventory
+
+POST http://localhost:8080/order
+Content-Type: application/json
+Accept: application/json
+
+{ 
+    "workflowdata": { 
+        "orderId": "order-123",
+        "item": "1110"
+    } 
+}
+
+########################################################
+# Start order workflow
+# - use case: item not available in the inventory
+
+POST http://localhost:8080/order
+Content-Type: application/json
+Accept: application/json
+
+{ 
+    "workflowdata": { 
+        "orderId": "order-123",
+        "item": "1111"
+    } 
+}
