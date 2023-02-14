@@ -1,4 +1,8 @@
 ########################################################
+# Variables
+@orderId = 1000
+
+########################################################
 # Start order workflow
 # - use case: item available in the inventory
 
@@ -8,7 +12,7 @@ Accept: application/json
 
 { 
     "workflowdata": { 
-        "orderId": "{{orderId}}23",
+        "orderId": "{{orderId}}",
         "item": "1110"
     } 
 }
@@ -23,16 +27,14 @@ Accept: application/json
 
 { 
     "workflowdata": { 
-        "orderId": "{{orderId}}23",
+        "orderId": "{{orderId}}",
         "item": "1111"
     } 
 }
 
-
 ########################################################
 # Start order workflow through CloudEvent
 # - use case: item available in the inventory
-@orderId = 1000
 
 POST http://localhost:8080/
 Content-Type: application/json
